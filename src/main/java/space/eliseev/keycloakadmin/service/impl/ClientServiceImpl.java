@@ -32,7 +32,7 @@ public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
 
     @Override
-    public List<Client> getAllClients() {
+    public List<Client> getAll() {
         return clientRepository.findAll();
     }
 

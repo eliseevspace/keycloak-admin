@@ -28,7 +28,7 @@ public interface ClientService {
      *
      * @return список всех пользователей
      */
-    List<Client> getAllClients();
+    List<Client> getAll();
 
     /**
      * Получить клиента по идентификатору

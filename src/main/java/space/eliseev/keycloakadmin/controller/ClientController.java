@@ -36,8 +36,8 @@ public class ClientController {
     private final ClientService clientService;
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Client>> getClients() {
-        return new ResponseEntity<>(clientService.getAllClients(), HttpStatus.OK);
+    public ResponseEntity<List<Client>> getAll() {
+        return new ResponseEntity<>(clientService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/getById/{id}")

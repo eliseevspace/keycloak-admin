@@ -28,7 +28,7 @@ public interface UserService {
      *
      * @return список всех пользователей
      */
-    List<User> getAllUsers();
+    List<User> getAll();
 
     /**
      * Получить пользователя по идентификатору
