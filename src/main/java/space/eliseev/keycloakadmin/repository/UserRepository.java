@@ -14,6 +14,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import space.eliseev.keycloakadmin.entity.User;
 
+import java.util.Optional;
+
 /**
  * Получение информации о пользователях
  *
@@ -21,4 +23,20 @@ import space.eliseev.keycloakadmin.entity.User;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
+
+    /**
+     * Найти пользователя по логину
+     *
+     * @param username Логин пользователя
+     * @return пользователя
+     */
+    Optional<User> findByUsername(String username);
+
+    /**
+     * Найти пользователя по адресу электронной почты
+     *
+     * @param email Адрес электронной почты пользователя
+     * @return пользователя
+     */
+    Optional<User> findByEmail(String email);
 }

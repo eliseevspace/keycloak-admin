@@ -40,4 +40,14 @@ public class UserServiceImpl implements UserService {
     public Optional<User> getById(@NonNull final String id) {
         return userRepository.findById(id);
     }
+
+    @Override
+    public Optional<User> getByUsername(@NonNull String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public Optional<User> getByEmail(@NonNull String email) {
+        return userRepository.findByEmail(email);
+    }
 }

@@ -50,12 +50,20 @@ public class UserController {
     @GetMapping("/getByUsername/{username}")
     public ResponseEntity<User> getByUsername(@PathVariable String username) {
 
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        final Optional<User> user = userService.getByUsername(username);
+
+        return user
+                .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/getByEmail/{email}")
     public ResponseEntity<User> getByEmail(@PathVariable String email) {
 
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        final Optional<User> user = userService.getByEmail(email);
+
+        return user
+                .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
