@@ -37,25 +37,25 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Optional<Event> getById(@NonNull String id) {
+    public Optional<Event> getById(@NonNull final String id) {
         return eventRepository.findById(id);
     }
 
     @Override
-    public List<Event> getAllByUserId(@NonNull String userId) {
+    public List<Event> getAllByUserId(@NonNull final String userId) {
         return eventRepository.findAllByUserId(userId);
     }
 
     @Override
-    public List<Event> getAllBetween(@NonNull Long startInclusive,
-                                     @NonNull Long endExclusive) {
+    public List<Event> getAllBetween(@NonNull final Long startInclusive,
+                                     @NonNull final Long endExclusive) {
         return eventRepository.findAllBetween(startInclusive, endExclusive);
     }
 
     @Override
-    public List<Event> getAllByUserIdAndBetween(@NonNull String userId,
-                                                @NonNull Long startInclusive,
-                                                @NonNull Long endExclusive) {
+    public List<Event> getAllByUserIdAndBetween(@NonNull final String userId,
+                                                @NonNull final Long startInclusive,
+                                                @NonNull final Long endExclusive) {
         return eventRepository.findAllByUserIdAndBetween(userId, startInclusive, endExclusive);
     }
 }

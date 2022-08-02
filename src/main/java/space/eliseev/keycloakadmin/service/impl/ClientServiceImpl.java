@@ -37,12 +37,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Optional<Client> getById(@NonNull String id) {
+    public Optional<Client> getById(@NonNull final String id) {
         return clientRepository.findById(id);
     }
 
     @Override
-    public Optional<Client> getByName(@NonNull String name) {
+    public Optional<Client> getByName(@NonNull final String name) {
         return clientRepository.findByName(name);
     }
 }
