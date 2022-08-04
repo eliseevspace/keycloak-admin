@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import space.eliseev.keycloakadmin.entity.Realm;
+import space.eliseev.keycloakadmin.model.entity.Realm;
 import space.eliseev.keycloakadmin.service.RealmService;
 
 import java.util.List;

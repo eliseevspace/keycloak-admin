@@ -8,27 +8,14 @@
  *  Legal use of the software provides receipt of a license from the right holder only.
  */
 
-package space.eliseev.keycloakadmin.repository;
+package space.eliseev.keycloakadmin.model.dto;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import space.eliseev.keycloakadmin.model.entity.Realm;
-
-import java.util.Optional;
+import space.eliseev.keycloakadmin.model.entity.Client;
 
 /**
- * Получение информации о realm
+ * DTO клиента {@link Client}
  *
  * @author <a href="mailto:a.s.eliseev@yandex.ru">Aleksandr Eliseev</a>
  */
-@Repository
-public interface RealmRepository extends JpaRepository<Realm, String> {
-
-    /**
-     * Найти realm по имени
-     *
-     * @param name Имя realm
-     * @return realm
-     */
-    Optional<Realm> findByName(String name);
+public class ClientDto {
 }

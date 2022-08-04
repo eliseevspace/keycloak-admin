@@ -13,12 +13,14 @@ package space.eliseev.keycloakadmin.service.impl;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import space.eliseev.keycloakadmin.entity.User;
+import space.eliseev.keycloakadmin.model.dto.UserDto;
+import space.eliseev.keycloakadmin.model.mapper.UserMapper;
 import space.eliseev.keycloakadmin.repository.UserRepository;
 import space.eliseev.keycloakadmin.service.UserService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Реализация {@link UserService}
@@ -30,24 +32,35 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public List<UserDto> getAll() {
+        return userRepository
+                .findAll()
+                .stream()
+                .map(userMapper::userToUserDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<User> getById(@NonNull final String id) {
-        return userRepository.findById(id);
+    public Optional<UserDto> getById(@NonNull final String id) {
+        return userRepository
+                .findById(id)
+                .map(userMapper::userToUserDto);
     }
 
     @Override
-    public Optional<User> getByUsername(@NonNull final String username) {
-        return userRepository.findByUsername(username);
+    public Optional<UserDto> getByUsername(@NonNull final String username) {
+        return userRepository
+                .findByUsername(username)
+                .map(userMapper::userToUserDto);
     }
 
     @Override
-    public Optional<User> getByEmail(@NonNull final String email) {
-        return userRepository.findByEmail(email);
+    public Optional<UserDto> getByEmail(@NonNull final String email) {
+        return userRepository
+                .findByEmail(email)
+                .map(userMapper::userToUserDto);
     }
 }

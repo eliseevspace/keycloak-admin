@@ -8,27 +8,23 @@
  *  Legal use of the software provides receipt of a license from the right holder only.
  */
 
-package space.eliseev.keycloakadmin.repository;
+package space.eliseev.keycloakadmin.model.entity;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import space.eliseev.keycloakadmin.model.entity.Realm;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Optional;
+import javax.persistence.*;
 
 /**
- * Получение информации о realm
- *
  * @author <a href="mailto:a.s.eliseev@yandex.ru">Aleksandr Eliseev</a>
  */
-@Repository
-public interface RealmRepository extends JpaRepository<Realm, String> {
+@Getter
+@Setter
+@MappedSuperclass
+public abstract class BaseEntity {
 
-    /**
-     * Найти realm по имени
-     *
-     * @param name Имя realm
-     * @return realm
-     */
-    Optional<Realm> findByName(String name);
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", length = 36)
+    private String id;
 }

@@ -13,7 +13,7 @@ package space.eliseev.keycloakadmin.service.impl;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import space.eliseev.keycloakadmin.entity.Client;
+import space.eliseev.keycloakadmin.model.entity.Client;
 import space.eliseev.keycloakadmin.repository.ClientRepository;
 import space.eliseev.keycloakadmin.service.ClientService;
 

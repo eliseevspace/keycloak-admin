@@ -11,7 +11,7 @@
 package space.eliseev.keycloakadmin.service;
 
 import lombok.NonNull;
-import space.eliseev.keycloakadmin.entity.Client;
+import space.eliseev.keycloakadmin.model.entity.Client;
 
 import java.util.List;
 import java.util.Optional;

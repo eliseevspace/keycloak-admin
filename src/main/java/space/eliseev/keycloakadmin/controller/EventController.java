@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import space.eliseev.keycloakadmin.entity.Event;
+import space.eliseev.keycloakadmin.model.entity.Event;
 import space.eliseev.keycloakadmin.service.EventService;
 
 import java.util.List;
