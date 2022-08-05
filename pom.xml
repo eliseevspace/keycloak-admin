@@ -12,13 +12,14 @@
 
     <groupId>space.eliseev</groupId>
     <artifactId>keycloak-admin</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.6-SNAPSHOT</version>
     <name>keycloak-admin</name>
     <description>Keycloak admin panel</description>
 
     <properties>
         <java.version>17</java.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
+        <springdoc-openapi-ui.version>1.6.9</springdoc-openapi-ui.version>
     </properties>
 
     <dependencies>
@@ -55,6 +56,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc-openapi-ui.version}</version>
         </dependency>
 
         <dependency>
