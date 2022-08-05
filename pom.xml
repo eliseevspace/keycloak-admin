@@ -12,7 +12,7 @@
 
     <groupId>space.eliseev</groupId>
     <artifactId>keycloak-admin</artifactId>
-    <version>0.0.6-SNAPSHOT</version>
+    <version>0.0.7-SNAPSHOT</version>
     <name>keycloak-admin</name>
     <description>Keycloak admin panel</description>
 

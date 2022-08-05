@@ -10,6 +10,14 @@
 
 package space.eliseev.keycloakadmin.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,17 +39,50 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/user", produces = "application/json; charset=UTF-8")
+@Tag(name = "User API", description = "Получение информации о пользователях")
 public class UserController {
 
     private final UserService userService;
 
+    @Operation(
+            summary = "Get all users",
+            description = "Получить список всех пользователей",
+            tags = {"User API"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserDto.class))),
+                    description = "Successful operation")
+    })
     @GetMapping(value = "/getAll")
     public ResponseEntity<List<UserDto>> getAll() {
         return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "Get user by ID",
+            description = "Получить пользователя по идентификатору",
+            tags = {"User API"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserDto.class))),
+                    description = "Successful operation"),
+            @ApiResponse(
+                    responseCode = "404",
+                    content = @Content,
+                    description = "User not found")
+    })
     @GetMapping("/getById/{id}")
-    public ResponseEntity<UserDto> getById(@PathVariable String id) {
+    public ResponseEntity<UserDto> getById(
+            @Parameter(
+                    required = true,
+                    description = "Идентификатор пользователя")
+            @PathVariable String id) {
 
         final Optional<UserDto> user = userService.getById(id);
 
@@ -50,8 +91,28 @@ public class UserController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @Operation(
+            summary = "Get user by username",
+            description = "Получить пользователя по логину",
+            tags = {"User API"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserDto.class))),
+                    description = "Successful operation"),
+            @ApiResponse(
+                    responseCode = "404",
+                    content = @Content,
+                    description = "User not found")
+    })
     @GetMapping("/getByUsername/{username}")
-    public ResponseEntity<UserDto> getByUsername(@PathVariable String username) {
+    public ResponseEntity<UserDto> getByUsername(
+            @Parameter(
+                    required = true,
+                    description = "Логин пользователя")
+            @PathVariable String username) {
 
         final Optional<UserDto> user = userService.getByUsername(username);
 
@@ -60,8 +121,28 @@ public class UserController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @Operation(
+            summary = "Get user by email",
+            description = "Получить пользователя по адресу электронной почты",
+            tags = {"User API"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UserDto.class))),
+                    description = "Successful operation"),
+            @ApiResponse(
+                    responseCode = "404",
+                    content = @Content,
+                    description = "User not found")
+    })
     @GetMapping("/getByEmail/{email}")
-    public ResponseEntity<UserDto> getByEmail(@PathVariable String email) {
+    public ResponseEntity<UserDto> getByEmail(
+            @Parameter(
+                    required = true,
+                    description = "Адрес электронной почты пользователя")
+            @PathVariable String email) {
 
         final Optional<UserDto> user = userService.getByEmail(email);
 
