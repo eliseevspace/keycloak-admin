@@ -25,6 +25,7 @@ import space.eliseev.keycloakadmin.model.entity.User;
 public interface UserMapper {
 
     @Mapping(target = "createdTimestamp", expression = "java(TimeUtils.toZonedDateTime(user.getCreatedTimestamp()))")
+    @Mapping(target = "realmName", expression = "java(user.getRealm().getName())")
     UserDto userToUserDto(User user);
 
     @Mapping(target = "createdTimestamp", expression = "java(TimeUtils.toLong(userDto.getCreatedTimestamp()))")

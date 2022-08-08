@@ -13,9 +13,7 @@ package space.eliseev.keycloakadmin.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Пользователь
@@ -49,7 +47,7 @@ public class User extends BaseEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "realm_id")
+    @Column(name = "realm_id", insertable = false, updatable = false)
     private String realmId;
 
     @Column(name = "username")
@@ -63,4 +61,8 @@ public class User extends BaseEntity {
 
     @Column(name = "not_before")
     private Integer notBefore;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private Realm realm;
 }
