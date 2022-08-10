@@ -30,7 +30,7 @@ public class UserDto {
     private Boolean enabled;
     private String firstName;
     private String lastName;
-    private String realmName;
+    private String realmId;
     private String username;
     private ZonedDateTime createdTimestamp;
     private Integer notBefore;

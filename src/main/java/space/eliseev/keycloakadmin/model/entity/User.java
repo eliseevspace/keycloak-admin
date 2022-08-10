@@ -47,6 +47,9 @@ public class User extends BaseEntity {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "realm_id")
+    private String realmId;
+
     @Column(name = "username")
     private String username;
 
@@ -58,8 +61,4 @@ public class User extends BaseEntity {
 
     @Column(name = "not_before")
     private Integer notBefore;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="realm_id", referencedColumnName="id")
-    private Realm realm;
 }
