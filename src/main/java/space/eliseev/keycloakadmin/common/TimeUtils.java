@@ -14,6 +14,7 @@ import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -56,5 +57,15 @@ public class TimeUtils {
      */
     public static String longToString(@NonNull final Long value) {
         return toZonedDateTime(value).format(formatter);
+    }
+
+    /**
+     * Преобразовать дату из формата LocalDate в формат Long
+     *
+     * @param value Дата в формате LocalDate
+     * @return дату в формате Long
+     */
+    public static Long localDateToLong(@NonNull final LocalDate value) {
+        return value.atStartOfDay().atZone(ZoneId.of("Europe/Moscow")).toInstant().toEpochMilli();
     }
 }

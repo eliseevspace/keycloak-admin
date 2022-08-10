@@ -13,6 +13,7 @@ package space.eliseev.keycloakadmin.common;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -24,13 +25,15 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  */
 class TimeUtilsTest {
 
-    private static final long TIME_TRUE = 1658137290000L;
+    private static final long TIME_TRUE = 1658091600000L;
     private static final long TIME_FALSE = 1658137290001L;
     private ZonedDateTime zonedDateTime;
+    private LocalDate localDate;
 
     @BeforeEach
     void setUp() {
-        zonedDateTime = ZonedDateTime.of(2022, 7, 18, 12, 41, 30, 0, ZoneId.of("Europe/Moscow"));
+        zonedDateTime = ZonedDateTime.of(2022, 7, 18, 0, 0, 0, 0, ZoneId.of("Europe/Moscow"));
+        localDate = LocalDate.of(2022, 7, 18);
     }
 
     @Test
@@ -43,5 +46,11 @@ class TimeUtilsTest {
     void toLong() {
         assertEquals(TIME_TRUE, TimeUtils.toLong(zonedDateTime));
         assertNotEquals(TIME_FALSE, TimeUtils.toLong(zonedDateTime));
+    }
+
+    @Test
+    void localDateToLong() {
+        assertEquals(TIME_TRUE, TimeUtils.localDateToLong(localDate));
+        assertNotEquals(TIME_FALSE, TimeUtils.localDateToLong(localDate));
     }
 }

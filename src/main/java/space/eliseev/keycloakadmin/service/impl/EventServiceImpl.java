@@ -13,11 +13,13 @@ package space.eliseev.keycloakadmin.service.impl;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import space.eliseev.keycloakadmin.common.TimeUtils;
 import space.eliseev.keycloakadmin.model.dto.EventDto;
 import space.eliseev.keycloakadmin.model.mapper.EventMapper;
 import space.eliseev.keycloakadmin.repository.EventRepository;
 import space.eliseev.keycloakadmin.service.EventService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,10 +61,13 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventDto> getAllBetween(@NonNull final Long startInclusive,
-                                        @NonNull final Long endExclusive) {
+    public List<EventDto> getAllBetween(@NonNull final LocalDate startInclusive,
+                                        @NonNull final LocalDate endExclusive) {
+
         return eventRepository
-                .findAllBetween(startInclusive, endExclusive)
+                .findAllBetween(
+                        TimeUtils.localDateToLong(startInclusive),
+                        TimeUtils.localDateToLong(endExclusive))
                 .stream()
                 .map(eventMapper::eventToEventDto)
                 .toList();
@@ -70,10 +75,13 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<EventDto> getAllByUsernameAndBetween(@NonNull final String username,
-                                                     @NonNull final Long startInclusive,
-                                                     @NonNull final Long endExclusive) {
+                                                     @NonNull final LocalDate startInclusive,
+                                                     @NonNull final LocalDate endExclusive) {
         return eventRepository
-                .findAllByUsernameAndBetween(username, startInclusive, endExclusive)
+                .findAllByUsernameAndBetween(
+                        username,
+                        TimeUtils.localDateToLong(startInclusive),
+                        TimeUtils.localDateToLong(endExclusive))
                 .stream()
                 .map(eventMapper::eventToEventDto)
                 .toList();

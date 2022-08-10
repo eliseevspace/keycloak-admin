@@ -12,6 +12,7 @@ package space.eliseev.keycloakadmin.model.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import space.eliseev.keycloakadmin.common.ObjectUtils;
 import space.eliseev.keycloakadmin.common.TimeUtils;
 import space.eliseev.keycloakadmin.model.dto.EventDto;
 import space.eliseev.keycloakadmin.model.entity.Event;
@@ -21,13 +22,11 @@ import space.eliseev.keycloakadmin.model.entity.Event;
  *
  * @author <a href="mailto:a.s.eliseev@yandex.ru">Aleksandr Eliseev</a>
  */
-@Mapper(componentModel = "spring", imports = TimeUtils.class)
+@Mapper(componentModel = "spring",
+        imports = {TimeUtils.class, ObjectUtils.class})
 public interface EventMapper {
 
     @Mapping(target = "eventTime", expression = "java(TimeUtils.longToString(event.getEventTime()))")
-    @Mapping(target = "username", expression = "java(event.getUser().getUsername())")
+    @Mapping(target = "username", expression = "java(ObjectUtils.getUsername(event))")
     EventDto eventToEventDto(Event event);
-
-//    @Mapping(target = "eventTime", expression = "java(TimeUtils.toLong(eventDto.getEventTime()))")
-//    Event eventDtoToEvent(EventDto eventDto);
 }

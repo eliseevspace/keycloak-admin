@@ -13,6 +13,7 @@ package space.eliseev.keycloakadmin.service;
 import lombok.NonNull;
 import space.eliseev.keycloakadmin.model.dto.EventDto;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,7 +54,7 @@ public interface EventService {
      * @param endExclusive   Дата конца (исключительно)
      * @return список событий
      */
-    List<EventDto> getAllBetween(@NonNull Long startInclusive, @NonNull Long endExclusive);
+    List<EventDto> getAllBetween(@NonNull LocalDate startInclusive, @NonNull LocalDate endExclusive);
 
     /**
      * Получить список событий по логину пользователя за период
@@ -63,5 +64,5 @@ public interface EventService {
      * @param endExclusive   Дата конца (исключительно)
      * @return список событий
      */
-    List<EventDto> getAllByUsernameAndBetween(@NonNull String username, @NonNull Long startInclusive, @NonNull Long endExclusive);
+    List<EventDto> getAllByUsernameAndBetween(@NonNull String username, @NonNull LocalDate startInclusive, @NonNull LocalDate endExclusive);
 }
