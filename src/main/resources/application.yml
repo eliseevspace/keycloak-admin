@@ -1,11 +1,20 @@
 spring:
+
   application:
     name: keycloak-admin
+
   datasource:
     driverClassName: org.postgresql.Driver
     username: @db-username@
     password: @db-password@
     url: @db-url@
+
   jpa:
     hibernate:
       ddl-auto: validate
+
+  mvc:
+    format:
+      date: dd.MM.yyyy
+      date-time: dd.MM.yyyy HH:mm:ss
+      time: HH:mm:ss

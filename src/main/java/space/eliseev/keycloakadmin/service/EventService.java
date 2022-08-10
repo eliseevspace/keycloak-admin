@@ -11,7 +11,7 @@
 package space.eliseev.keycloakadmin.service;
 
 import lombok.NonNull;
-import space.eliseev.keycloakadmin.model.entity.Event;
+import space.eliseev.keycloakadmin.model.dto.EventDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +28,7 @@ public interface EventService {
      *
      * @return список событий
      */
-    List<Event> getAll();
+    List<EventDto> getAll();
 
     /**
      * Получить событие по идентификатору
@@ -36,15 +36,15 @@ public interface EventService {
      * @param id Идентификатор события
      * @return событие
      */
-    Optional<Event> getById(@NonNull String id);
+    Optional<EventDto> getById(@NonNull String id);
 
     /**
-     * Получить список событий по идентификатору пользователя
+     * Получить список событий по логину пользователя
      *
-     * @param userId Идентификатор пользователя
+     * @param username Логин пользователя
      * @return список событий
      */
-    List<Event> getAllByUserId(@NonNull String userId);
+    List<EventDto> getAllByUsername(@NonNull String username);
 
     /**
      * Получить список событий за период
@@ -53,15 +53,15 @@ public interface EventService {
      * @param endExclusive   Дата конца (исключительно)
      * @return список событий
      */
-    List<Event> getAllBetween(@NonNull Long startInclusive, @NonNull Long endExclusive);
+    List<EventDto> getAllBetween(@NonNull Long startInclusive, @NonNull Long endExclusive);
 
     /**
-     * Получить список событий по идентификатору пользователя за период
+     * Получить список событий по логину пользователя за период
      *
-     * @param userId         Идентификатор пользователя
+     * @param username       Логин пользователя
      * @param startInclusive Дата начала
      * @param endExclusive   Дата конца (исключительно)
      * @return список событий
      */
-    List<Event> getAllByUserIdAndBetween(@NonNull String userId, @NonNull Long startInclusive, @NonNull Long endExclusive);
+    List<EventDto> getAllByUsernameAndBetween(@NonNull String username, @NonNull Long startInclusive, @NonNull Long endExclusive);
 }

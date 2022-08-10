@@ -13,7 +13,8 @@ package space.eliseev.keycloakadmin.service.impl;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import space.eliseev.keycloakadmin.model.entity.Event;
+import space.eliseev.keycloakadmin.model.dto.EventDto;
+import space.eliseev.keycloakadmin.model.mapper.EventMapper;
 import space.eliseev.keycloakadmin.repository.EventRepository;
 import space.eliseev.keycloakadmin.service.EventService;
 
@@ -30,32 +31,51 @@ import java.util.Optional;
 public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
+    private final EventMapper eventMapper;
 
     @Override
-    public List<Event> getAll() {
-        return eventRepository.findAll();
+    public List<EventDto> getAll() {
+        return eventRepository
+                .findAll()
+                .stream()
+                .map(eventMapper::eventToEventDto)
+                .toList();
     }
 
     @Override
-    public Optional<Event> getById(@NonNull final String id) {
-        return eventRepository.findById(id);
+    public Optional<EventDto> getById(@NonNull final String id) {
+        return eventRepository
+                .findById(id)
+                .map(eventMapper::eventToEventDto);
     }
 
     @Override
-    public List<Event> getAllByUserId(@NonNull final String userId) {
-        return eventRepository.findAllByUserId(userId);
+    public List<EventDto> getAllByUsername(@NonNull final String username) {
+        return eventRepository
+                .findAllByUsername(username)
+                .stream()
+                .map(eventMapper::eventToEventDto)
+                .toList();
     }
 
     @Override
-    public List<Event> getAllBetween(@NonNull final Long startInclusive,
-                                     @NonNull final Long endExclusive) {
-        return eventRepository.findAllBetween(startInclusive, endExclusive);
+    public List<EventDto> getAllBetween(@NonNull final Long startInclusive,
+                                        @NonNull final Long endExclusive) {
+        return eventRepository
+                .findAllBetween(startInclusive, endExclusive)
+                .stream()
+                .map(eventMapper::eventToEventDto)
+                .toList();
     }
 
     @Override
-    public List<Event> getAllByUserIdAndBetween(@NonNull final String userId,
-                                                @NonNull final Long startInclusive,
-                                                @NonNull final Long endExclusive) {
-        return eventRepository.findAllByUserIdAndBetween(userId, startInclusive, endExclusive);
+    public List<EventDto> getAllByUsernameAndBetween(@NonNull final String username,
+                                                     @NonNull final Long startInclusive,
+                                                     @NonNull final Long endExclusive) {
+        return eventRepository
+                .findAllByUsernameAndBetween(username, startInclusive, endExclusive)
+                .stream()
+                .map(eventMapper::eventToEventDto)
+                .toList();
     }
 }

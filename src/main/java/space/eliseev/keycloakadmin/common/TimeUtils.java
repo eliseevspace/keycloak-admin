@@ -16,6 +16,7 @@ import lombok.experimental.UtilityClass;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Утилитный класс для работы с датой
@@ -25,11 +26,35 @@ import java.time.ZonedDateTime;
 @UtilityClass
 public class TimeUtils {
 
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+
+    /**
+     * Преобразовать дату из формата Long в формат ZonedDateTime
+     *
+     * @param value Дата в формате Long
+     * @return дату в формате ZonedDateTime
+     */
     public static ZonedDateTime toZonedDateTime(@NonNull final Long value) {
         return ZonedDateTime.ofInstant(Instant.ofEpochMilli(value), ZoneId.of("Europe/Moscow"));
     }
 
+    /**
+     * Преобразовать дату из формата ZonedDateTime в формат Long
+     *
+     * @param value Дата в формате ZonedDateTime
+     * @return дату в формате Long
+     */
     public static Long toLong(@NonNull final ZonedDateTime value) {
         return value.toInstant().toEpochMilli();
+    }
+
+    /**
+     * Преобразовать дату из формата Long в формат String с использованием форматтера {@link #formatter}
+     *
+     * @param value Дата в формате Long
+     * @return дату в формате String
+     */
+    public static String longToString(@NonNull final Long value) {
+        return toZonedDateTime(value).format(formatter);
     }
 }

@@ -10,6 +10,7 @@
 
 package space.eliseev.keycloakadmin.repository;
 
+import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import space.eliseev.keycloakadmin.model.entity.Event;
@@ -24,12 +25,13 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event, String> {
 
     /**
-     * Найти все события по идентификатору пользователя
+     * Найти все события по логину пользователя
      *
-     * @param userId Идентификатор пользователя
+     * @param username Логин пользователя
      * @return список событий
      */
-    List<Event> findAllByUserId(String userId);
+    @Query("SELECT e FROM Event e WHERE e.user.username = :username")
+    List<Event> findAllByUsername(@NonNull String username);
 
     /**
      * Найти все события за период
@@ -44,11 +46,11 @@ public interface EventRepository extends JpaRepository<Event, String> {
     /**
      * Найти все события по идентификатору пользователя за период
      *
-     * @param userId         Идентификатор пользователя
+     * @param username       Логин пользователя
      * @param startInclusive Дата начала
      * @param endExclusive   Дата конца (исключительно)
      * @return список событий
      */
-    @Query("SELECT e FROM Event e WHERE e.userId = :userId AND e.eventTime BETWEEN :startInclusive AND :endExclusive")
-    List<Event> findAllByUserIdAndBetween(String userId, Long startInclusive, Long endExclusive);
+    @Query("SELECT e FROM Event e WHERE e.user.username = :username AND e.eventTime BETWEEN :startInclusive AND :endExclusive")
+    List<Event> findAllByUsernameAndBetween(@NonNull String username, Long startInclusive, Long endExclusive);
 }

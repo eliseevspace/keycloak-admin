@@ -20,7 +20,6 @@ import space.eliseev.keycloakadmin.service.UserService;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Реализация {@link UserService}
@@ -40,7 +39,7 @@ public class UserServiceImpl implements UserService {
                 .findAll()
                 .stream()
                 .map(userMapper::userToUserDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

@@ -10,6 +10,8 @@
 
 package space.eliseev.keycloakadmin.model.dto;
 
+import lombok.Builder;
+import lombok.Data;
 import space.eliseev.keycloakadmin.model.entity.Event;
 
 /**
@@ -17,5 +19,17 @@ import space.eliseev.keycloakadmin.model.entity.Event;
  *
  * @author <a href="mailto:a.s.eliseev@yandex.ru">Aleksandr Eliseev</a>
  */
+@Data
+@Builder
 public class EventDto {
+
+    private String clientId;
+    private String detailsJson;
+    private String error;
+    private String ipAddress;
+    private String realmId;
+    private String sessionId;
+    private String eventTime;
+    private String type;
+    private String username;
 }

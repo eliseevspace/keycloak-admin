@@ -12,6 +12,8 @@ package space.eliseev.keycloakadmin.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 
@@ -50,6 +52,8 @@ public class Event extends BaseEntity {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "user_id")
-    private String userId;
+    @OneToOne
+    @JoinColumn(name="user_id", referencedColumnName="id")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private User user;
 }
